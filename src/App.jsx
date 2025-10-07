@@ -6,7 +6,7 @@ import { CandidateProfile } from "./features/candidates/CandidateProfile";
 import { AssessmentsPage } from "./features/assessments/AssessmentsPage";
 import { ensureSeed, db } from "./db/indexedDB";
 import { makeServer } from "./api/server"; // MirageJS server
-import logo from "./assets/talent_flow_logo2.jpg"; 
+import logo from "./assets/talent_flow_logo2.JPG"; 
 
 const linkClass = ({ isActive }) =>
   `px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-violet-900 ${
