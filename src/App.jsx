@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import { JobsBoard } from "./features/jobs/JobsBoard";
-import { CandidatesBoard } from "./features/candidates/candidatesBoard";
-import { CandidateProfile } from "./features/candidates/candidateProfile";
+import { CandidatesBoard } from "./features/candidates/CandidatesBoard";
+import { CandidateProfile } from "./features/candidates/CandidateProfile";
 import { AssessmentsPage } from "./features/assessments/AssessmentsPage";
 import { ensureSeed, db } from "./db/indexedDB";
 import { makeServer } from "./api/server"; // MirageJS server
