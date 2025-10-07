@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/Talent_Flow_React_Vite_FrontEnd",
+  base: "/Talent_Flow_React_Application",
 })
