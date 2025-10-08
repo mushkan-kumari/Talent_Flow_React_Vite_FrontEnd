@@ -34,7 +34,7 @@ export async function ensureSeed() {
   // ===== Seed Candidates =====
   const firstNames = ["John","Jane","Alice","Bob","Michael","Emily","David","Sophia"];
   const lastNames = ["Smith","Johnson","Brown","Taylor","Anderson","Thomas","Lee","Martinez"];
-  const stages = ["Applied", "Screen", "Technical", "Offer", "Hired"];
+  const stages = ["Applied", "Screen", "Technical", "Offer", "Hired", "Rejected"];
 
   const candidates = Array.from({ length: 1000 }, (_, i) => {
     const first = firstNames[Math.floor(Math.random() * firstNames.length)];

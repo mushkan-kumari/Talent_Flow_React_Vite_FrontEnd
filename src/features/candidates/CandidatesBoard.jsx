@@ -2,13 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { CandidateProfile } from "./CandidateProfile";
 
-const STAGES = ["Applied", "Screen", "Technical", "Offer", "Hired"];
+const STAGES = ["Applied", "Screen", "Technical", "Offer", "Hired", "Rejected"];
 const STAGE_LABELS = {
   Applied: "Applied",
   Screen: "Screen",
   Technical: "Technical",
   Offer: "Offer",
-  Hired: "Hired"
+  Hired: "Hired",
+  Rejected: "Rejected"
 };
 
 export const CandidatesBoard = () => {
@@ -87,7 +88,7 @@ export const CandidatesBoard = () => {
       </div>
 
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 overflow-x-auto">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 overflow-x-auto">
           {STAGES.map(stage => (
             <Droppable key={stage} droppableId={stage}>
               {(provided) => (
@@ -113,7 +114,7 @@ export const CandidatesBoard = () => {
                             </div>
                             <div>
                               <div className="font-medium">{c.name}</div>
-                              <div className="text-xs text-gray-500">{c.email}</div>
+                             
                             </div>
                           </div>
                         )}

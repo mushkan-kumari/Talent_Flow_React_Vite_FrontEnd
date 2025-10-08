@@ -4,7 +4,7 @@ import { db } from "../../db/indexedDB";
 
 Modal.setAppElement("#root");
 
-const STAGES = ["Applied", "Screen", "Technical", "Offer", "Hired"];
+const STAGES = ["Applied", "Screen", "Technical", "Offer", "Hired", "Rejected"];
 
 export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
   const [candidate, setCandidate] = useState(null);
@@ -46,7 +46,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
   if (!candidate) return <div>Loading candidate...</div>;
 
   const currentStageIndex = STAGES.indexOf(candidate.stage);
-  const avatarUrl = `https://avatars.dicebear.com/api/avataaars/${candidate.id}.svg`;
+  const avatarUrl = `https://api.dicebear.com/9.x/avataaars/svg`;
 
   return (
     <Modal
@@ -57,7 +57,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-indigo-600">{candidate.name}</h2>
+        <h2 className="text-2xl font-bold text-violet-800">{candidate.name}</h2>
         <button onClick={onClose} className="text-red-600 font-bold text-xl">&times;</button>
       </div>
 
@@ -73,18 +73,18 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
 
       {/* Dot-Line Stage Chart */}
       <div className="mb-6">
-        <h3 className="font-semibold text-indigo-600 mb-4">Progress</h3>
+        <h3 className="font-semibold text-violet-800 mb-4">Progress</h3>
         <div className="flex items-center gap-2">
           {STAGES.map((stage, index) => {
             const completed = index <= currentStageIndex;
             return (
               <React.Fragment key={stage}>
                 <div className="flex flex-col items-center">
-                  <div className={`w-6 h-6 rounded-full border-2 ${completed ? "bg-indigo-600 border-indigo-600" : "bg-white border-gray-300"}`}></div>
+                  <div className={`w-6 h-6 rounded-full border-2 ${completed ? "bg-violet-800 border-violet-800" : "bg-white border-gray-300"}`}></div>
                   <span className="text-xs mt-1 text-center">{stage}</span>
                 </div>
                 {index < STAGES.length - 1 && (
-                  <div className={`flex-1 h-1 ${index < currentStageIndex ? "bg-indigo-600" : "bg-gray-300"}`}></div>
+                  <div className={`flex-1 h-1 ${index < currentStageIndex ? "bg-violet-800" : "bg-gray-300"}`}></div>
                 )}
               </React.Fragment>
             );
@@ -94,11 +94,11 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
 
       {/* Timeline Events */}
       <div className="mb-6">
-        <h3 className="font-semibold text-indigo-600 mb-2">Timeline</h3>
+        <h3 className="font-semibold text-violet-800 mb-2">Timeline</h3>
         <ul className="border-l-2 border-indigo-200 ml-4">
           {timeline.map(t => (
             <li key={t.id || t.date} className="mb-4 relative">
-              <span className="absolute -left-3 top-0 w-6 h-6 bg-indigo-500 rounded-full border-2 border-white"></span>
+              <span className="absolute -left-3 top-0 w-6 h-6 bg-violet-800 rounded-full border-2 border-white"></span>
               <div className="ml-4">
                 <div className="text-gray-700 font-medium">{t.stage}</div>
                 <div className="text-gray-500 text-sm">{new Date(t.date).toLocaleString()}</div>
@@ -111,7 +111,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
 
       {/* Notes Section */}
       <div>
-        <h3 className="font-semibold text-indigo-600 mb-2">Notes</h3>
+        <h3 className="font-semibold text-violet-800 mb-2">Notes</h3>
         <div className="flex flex-col gap-2 mb-2 max-h-64 overflow-y-auto">
           {notes.map(n => (
             <div key={n.id} className="bg-gray-100 p-2 rounded shadow-sm">
@@ -128,7 +128,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
             onChange={e => setNewNote(e.target.value)}
             className="flex-1 border p-2 rounded"
           />
-          <button onClick={addNote} className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Add</button>
+          <button onClick={addNote} className="bg-violet-800 text-white px-4 py-2 rounded hover:bg-violet-900">Add</button>
         </div>
       </div>
     </Modal>
