@@ -4,6 +4,7 @@ import { JobsBoard } from "./features/jobs/JobsBoard";
 import { CandidatesBoard } from "./features/candidates/CandidatesBoard";
 import { CandidateProfile } from "./features/candidates/CandidateProfile";
 import { AssessmentsPage } from "./features/assessments/AssessmentsPage";
+import { JobDetail } from "./features/jobs/JobDetails";
 import { ensureSeed, db } from "./db/indexedDB";
 import { makeServer } from "./api/server"; // MirageJS server
 import logo from "./assets/talent_flow_logo2.JPG"; 
@@ -75,6 +76,7 @@ export default function App() {
       <div className="p-6 min-h-screen bg-violet-200 flex justify-center items-start">
         <Routes>
           <Route path="/jobs" element={<JobsBoard />} />
+          <Route path="/jobs/:jobId" element={<JobDetail />} />
           <Route path="/candidates" element={<CandidatesBoard />} />
           <Route path="/candidates/:id" element={<CandidateProfile />} />
           <Route path="/assessments" element={<AssessmentsPage />} />
