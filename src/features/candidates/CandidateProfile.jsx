@@ -45,8 +45,15 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
 
   if (!candidate) return <div>Loading candidate...</div>;
 
-  const currentStageIndex = STAGES.indexOf(candidate.stage);
   const avatarUrl = `https://api.dicebear.com/9.x/avataaars/svg`;
+
+  // Determine stages dynamically based on candidate.stage
+const displayStages =
+  candidate.stage === "Rejected"
+    ? STAGES.filter(stage => stage !== "Hired" && stage !== "Offer") // rejected candidate: skip Hired & Offer
+    : STAGES.filter(stage => stage !== "Rejected"); // non-rejected candidate: skip Rejected
+
+const currentStageIndex = displayStages.indexOf(candidate.stage);
 
   return (
     <Modal
@@ -71,11 +78,12 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Timeline Chart */}
+  
+
       <div className="mb-6">
         <h3 className="font-semibold text-violet-800 mb-4">Progress</h3>
         <div className="flex items-center gap-2">
-          {STAGES.map((stage, index) => {
+          {displayStages.map((stage, index) => {
             const completed = index <= currentStageIndex;
             return (
               <React.Fragment key={stage}>
@@ -83,7 +91,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
                   <div className={`w-6 h-6 rounded-full border-2 ${completed ? "bg-violet-800 border-violet-800" : "bg-white border-gray-300"}`}></div>
                   <span className="text-xs mt-1 text-center">{stage}</span>
                 </div>
-                {index < STAGES.length - 1 && (
+                {index < displayStages.length - 1 && (
                   <div className={`flex-1 h-1 ${index < currentStageIndex ? "bg-violet-800" : "bg-gray-300"}`}></div>
                 )}
               </React.Fragment>
@@ -91,23 +99,29 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
           })}
         </div>
       </div>
-
+        
       {/* Timeline Events */}
       <div className="mb-6">
         <h3 className="font-semibold text-violet-800 mb-2">Timeline</h3>
         <ul className="border-l-2 border-indigo-200 ml-4">
-          {timeline.map(t => (
-            <li key={t.id || t.date} className="mb-4 relative">
-              <span className="absolute -left-3 top-0 w-6 h-6 bg-violet-800 rounded-full border-2 border-white"></span>
-              <div className="ml-4">
-                <div className="text-gray-700 font-medium">{t.stage}</div>
-                <div className="text-gray-500 text-sm">{new Date(t.date).toLocaleString()}</div>
-                {t.note && <div className="text-gray-600">{t.note}</div>}
-              </div>
-            </li>
-          ))}
+          {timeline
+            .filter(t => {
+              if (candidate.stage === "Rejected") return t.stage !== "Hired" && t.stage !== "Offer";
+              else return t.stage !== "Rejected";
+            })
+            .map(t => (
+              <li key={t.id || t.date} className="mb-4 relative">
+                <span className="absolute -left-3 top-0 w-6 h-6 bg-violet-800 rounded-full border-2 border-white"></span>
+                <div className="ml-4">
+                  <div className="text-gray-700 font-medium">{t.stage}</div>
+                  <div className="text-gray-500 text-sm">{new Date(t.date).toLocaleString()}</div>
+                  {t.note && <div className="text-gray-600">{t.note}</div>}
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
+          
 
       {/* Notes */}
       <div>
