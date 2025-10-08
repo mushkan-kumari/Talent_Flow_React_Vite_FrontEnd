@@ -55,13 +55,13 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
       className="bg-white p-6 rounded-lg max-w-3xl mx-auto mt-20 outline-none shadow-lg max-h-[90vh] overflow-y-auto"
       overlayClassName="fixed inset-0 bg-black/50 flex items-center justify-center"
     >
-      {/* Header */}
+      {/* Profile header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-violet-800">{candidate.name}</h2>
         <button onClick={onClose} className="text-red-600 font-bold text-xl">&times;</button>
       </div>
 
-      {/* Avatar + Info */}
+      {/* Candidate photo and information */}
       <div className="flex items-center gap-4 mb-6">
         <img src={avatarUrl} alt="avatar" className="w-20 h-20 rounded-full border" />
         <div>
@@ -71,7 +71,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Dot-Line Stage Chart */}
+      {/* Timeline Chart */}
       <div className="mb-6">
         <h3 className="font-semibold text-violet-800 mb-4">Progress</h3>
         <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ export const CandidateProfile = ({ candidateId, isOpen, onClose }) => {
         </ul>
       </div>
 
-      {/* Notes Section */}
+      {/* Notes */}
       <div>
         <h3 className="font-semibold text-violet-800 mb-2">Notes</h3>
         <div className="flex flex-col gap-2 mb-2 max-h-64 overflow-y-auto">

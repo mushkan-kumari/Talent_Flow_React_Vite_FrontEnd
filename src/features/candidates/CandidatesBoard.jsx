@@ -16,7 +16,7 @@ export const CandidatesBoard = () => {
   const [candidates, setCandidates] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
-  const [selectedJob, setSelectedJob] = useState(""); // <-- Job filter
+  const [selectedJob, setSelectedJob] = useState("");
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -106,6 +106,7 @@ export const CandidatesBoard = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            // Open profile page on clicking on candidate
                             onClick={() => openProfile(c.id)}
                             className="flex items-center p-2 bg-violet-100 rounded-full shadow hover:shadow-lg cursor-pointer"
                           >

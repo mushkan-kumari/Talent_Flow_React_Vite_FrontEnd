@@ -113,7 +113,7 @@ export const AssessmentBuilder = ({ assessmentId }) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 w-full max-w-7xl p-4">
-      {/* Builder panel */}
+      {/* Assessment Builder panel */}
       <div className="w-full md:w-1/2 bg-white rounded-2xl shadow-lg p-6 overflow-y-auto max-h-[90vh]">
         <div className="flex justify-between items-center mb-4">
   <input
@@ -127,7 +127,7 @@ export const AssessmentBuilder = ({ assessmentId }) => {
       className="bg-violet-700 text-white px-3 py-1 rounded hover:bg-violet-800"
       onClick={async () => {
         await db.assessments.put(assessment);
-        if (onAssessmentChange) onAssessmentChange(assessment); // update wrapper state
+        if (onAssessmentChange) onAssessmentChange(assessment); 
         alert("Assessment title saved!");
       }}
     >
@@ -206,7 +206,7 @@ export const AssessmentBuilder = ({ assessmentId }) => {
         )}
       </div>
 
-      {/* Live Preview */}
+      {/* Live Preview Panel*/}
       <div className="w-full md:w-1/2 bg-white rounded-2xl shadow-lg p-6 overflow-y-auto max-h-[90vh]">
         <h2 className="text-2xl font-bold text-green-700 mb-4">Live Preview</h2>
         <form onSubmit={handleSubmit}>

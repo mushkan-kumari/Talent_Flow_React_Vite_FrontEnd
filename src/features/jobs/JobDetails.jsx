@@ -9,7 +9,7 @@ export const JobDetail = () => {
   useEffect(() => {
     const loadJob = async () => {
       const j = await db.jobs.get(jobId);
-      setJob(j);
+      setJob(j || {}); // fallback to empty object if job not found
     };
     loadJob();
   }, [jobId]);
@@ -17,23 +17,27 @@ export const JobDetail = () => {
   if (!job) return <div className="text-center text-gray-500 mt-20">Loading job details...</div>;
 
   return (
-    <div className="p-6 max-w-4xl mx-auto mt-10 bg-violet-100 shadow-lg rounded-lg border border-gray-200"
-         style={{ height: "500px", overflowY: "auto" }}>
+    <div
+      className="p-6 max-w-4xl mx-auto mt-10 bg-violet-100 shadow-lg rounded-lg border border-gray-200"
+      style={{ height: "500px", overflowY: "auto" }}
+    >
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-3xl font-bold text-violet-900">{job.title}</h2>
+        <h2 className="text-3xl font-bold text-violet-900">{job.title || "Untitled Job"}</h2>
         <span
           className={`px-3 py-1 rounded-full text-sm font-semibold ${
-            job.status === "active" ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-800"
+            job.status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-200 text-gray-800"
           }`}
         >
-          {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
+          {job.status ? job.status.charAt(0).toUpperCase() + job.status.slice(1) : "N/A"}
         </span>
       </div>
 
       <div className="mb-4">
         <h3 className="font-semibold text-violet-800 mb-2">Tags</h3>
         <div className="flex flex-wrap gap-2">
-          {job.tags?.length ? (
+          {job.tags && job.tags.length > 0 ? (
             job.tags.map((tag, idx) => (
               <span
                 key={idx}
@@ -51,7 +55,8 @@ export const JobDetail = () => {
       <div className="mb-4">
         <h3 className="font-semibold text-violet-800 mb-2">Job Details</h3>
         <p className="text-gray-900">
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices elit eget enim laoreet condimentum. Quisque vel ante libero. Nulla eu blandit quam, quis feugiat diam. Maecenas laoreet faucibus augue, venenatis ultrices metus pretium vitae. Duis quis ligula tellus. Nulla facilisi. Aliquam auctor, purus vel volutpat porttitor, metus metus iaculis arcu, sit amet scelerisque sem nisl vel nisi. Morbi fringilla pellentesque convallis. Nullam in feugiat nulla, quis commodo metus. Fusce bibendum nibh nec nisi cursus tristique.
+          {job.details ||
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis arcu ipsum, non hendrerit purus euismod sit amet. Sed non tempus leo. Proin ut arcu vitae nisl rhoncus pharetra lacinia a leo. Praesent maximus purus sem, ac iaculis nisi fringilla vitae. Integer et finibus est. Suspendisse quis libero ornare, imperdiet purus et, laoreet erat. Sed dapibus aliquam orci. Quisque sed magna at turpis porttitor pharetra. Donec pellentesque nunc lorem. Vivamus volutpat eget velit a malesuada. Suspendisse tristique a neque porta elementum. Aenean id egestas dolor, sed placerat velit. Quisque eu tempor ipsum. Etiam egestas ultricies accumsan. Pellentesque orci dolor, aliquam."}
         </p>
       </div>
 

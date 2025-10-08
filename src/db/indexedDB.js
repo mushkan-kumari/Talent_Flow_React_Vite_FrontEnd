@@ -35,7 +35,7 @@ export async function ensureSeed() {
   const jobs = Array.from({ length: 25 }, (_, i) => ({
     id: `job-${i + 1}`,
     title: `Job ${i + 1}`,
-    slug: `frontend-engineer-${i + 1}`,
+    slug: `engineer-${i + 1}`,
     status: statuses[i % statuses.length],
     order: i,
     tags: getRandomTags()
